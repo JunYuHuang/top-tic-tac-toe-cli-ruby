@@ -82,6 +82,7 @@ class Board
 
     def place(row, col, piece)
         @grid[row][col] = piece
+        @pieces_placed += 1
     end
 
     def meets_min_win_condition?
@@ -167,7 +168,7 @@ class State
         @turn = turn
     end
 
-    attr_reader(:board)
+    attr_accessor(:board)
     attr_accessor(:turn)
 
     def set_turn
@@ -175,11 +176,11 @@ class State
     end
 
     def is_game_over?
-        if @board.meets_min_win_condition?
+        if !@board.meets_min_win_condition?
             return false
         end
-        if (board.did_win?(Piece.CROSS) or
-            board.did_win?(Piece.CIRCLE))
+        if (@board.did_win?(Piece.CROSS) or
+            @board.did_win?(Piece.CIRCLE))
             return true
         end
         @board.is_full?
