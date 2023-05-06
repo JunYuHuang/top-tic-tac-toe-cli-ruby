@@ -1,9 +1,17 @@
 # top-tic-tac-toe-cli-ruby
 
+
+## How to run
+
+```ruby
+ruby index.rb
+```
+
 ## How to test
 
 ```ruby
-rspec index_spec.rb
+rspec Board_spec.rb
+rspec State_spec.rb
 ```
 
 ## Gem Dependencies
