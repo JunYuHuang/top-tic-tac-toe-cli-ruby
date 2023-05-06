@@ -42,7 +42,6 @@ class Board
                 board[r][c] = Piece.EMPTY
             end
         end
-
         board
     end
 
@@ -72,16 +71,13 @@ class Board
     def is_placeable?(row, col)
         def is_invalid?(input)
             is_not_int = input.class != Integer
-            is_not_in_range = input < 0 || input >= @size
-            is_not_empty = @grid[row][col] != Piece.EMPTY
-            return is_not_int or is_not_in_range or is_not_empty
+            is_not_in_range = input.to_i < 0 || input.to_i >= @size
+            is_not_int or is_not_in_range
         end
-
         if is_invalid?(row) or is_invalid?(col)
             return false
         end
-
-        true
+        @grid[row][col] == Piece.EMPTY
     end
 
     def place(row, col, piece)
@@ -96,7 +92,7 @@ class Board
         @pieces_placed == @size * @size
     end
 
-    def did_win_rows(piece)
+    def did_win_rows?(piece)
         @size.times do |r|
             count = 0
             @grid[r].each do |cell|
@@ -111,7 +107,7 @@ class Board
         false
     end
 
-    def did_win_cols(piece)
+    def did_win_cols?(piece)
         @size.times do |c|
             count = 0
             @size.times do |r|
@@ -126,21 +122,7 @@ class Board
         false
     end
 
-    def did_win_pos_diag(piece)
-        r = 0
-        c = 0
-        count = 0
-        while r < @size && c < @size
-            if @grid[r][c] == piece
-                count += 1
-            end
-            r += 1
-            c += 1
-        end
-        count == @size
-    end
-
-    def did_win_neg_diag(piece)
+    def did_win_pos_diag?(piece)
         r = @size - 1
         c = 0
         count = 0
@@ -154,11 +136,25 @@ class Board
         count == @size
     end
 
+    def did_win_neg_diag?(piece)
+        r = 0
+        c = 0
+        count = 0
+        while r < @size && c < @size
+            if @grid[r][c] == piece
+                count += 1
+            end
+            r += 1
+            c += 1
+        end
+        count == @size
+    end
+
     def did_win?(piece)
-        if (did_win_rows(piece) or
-            did_win_cols(piece) or
-            did_win_pos_diag(piece) or
-            did_win_neg_diag(piece))
+        if (did_win_rows?(piece) or
+            did_win_cols?(piece) or
+            did_win_pos_diag?(piece) or
+            did_win_neg_diag?(piece))
             return true
         end
         false
