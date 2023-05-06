@@ -78,7 +78,7 @@ rspec index_spec.rb
       - if row or col are not in bounds of the grid, return false
       - returns true if cell is empty else false
     - meetsMinWinCondition()?
-      - return self.`pieces_placed` == 5
+      - return self.`pieces_placed` >= `size` * 2 - 1
     - didPieceWin(piece)?
       - returns boolean that determines if the player `piece` won or not
       - for every row in self.`grid`,
