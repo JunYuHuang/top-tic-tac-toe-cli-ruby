@@ -84,17 +84,21 @@ RSpec.describe 'Board' do
         it 'works when called with on any in-bound cell with an X-piece' do
             board = Board.new
             expect(board.grid[1][1] == Piece.EMPTY).to eq(true)
+            expect(board.pieces_placed).to eq(0)
 
             board.place(1, 1, Piece.CROSS)
             expect(board.grid[1][1] == Piece.CROSS).to eq(true)
+            expect(board.pieces_placed).to eq(1)
         end
 
         it 'works when called with on any in-bound cell with an O-piece' do
             board = Board.new
             expect(board.grid[1][1] == Piece.EMPTY).to eq(true)
+            expect(board.pieces_placed).to eq(0)
 
             board.place(1, 1, Piece.CIRCLE)
             expect(board.grid[1][1] == Piece.CIRCLE).to eq(true)
+            expect(board.pieces_placed).to eq(1)
         end
     end
 
