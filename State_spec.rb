@@ -91,6 +91,36 @@ RSpec.describe 'State' do
         end
     end
 
+    describe "set_board()" do
+        it "returns false and does not update State.board if called with invalid coordinates (nil value)" do
+            state = State.new
+            expect(state.set_board(0, nil)).to eq(false)
+            expect(state.board.pieces_placed).to eq(0)
+        end
+
+        it "returns false and does not update State.board if called with invalid coordinates (non-empty cell)" do
+            grid = [
+                [Piece.EMPTY, Piece.EMPTY, Piece.EMPTY],
+                [Piece.EMPTY, Piece.CROSS, Piece.EMPTY],
+                [Piece.EMPTY, Piece.EMPTY, Piece.EMPTY]
+            ]
+            state = State.new(Board.new(grid))
+            expect(state.set_board(1, 1)).to eq(false)
+            expect(state.board.pieces_placed).to eq(1)
+        end
+
+        it "returns true and updates State.board if called with valid coordinates" do
+            grid = [
+                [Piece.EMPTY, Piece.EMPTY, Piece.EMPTY],
+                [Piece.CROSS, Piece.EMPTY, Piece.EMPTY],
+                [Piece.EMPTY, Piece.EMPTY, Piece.EMPTY]
+            ]
+            state = State.new(Board.new(grid))
+            expect(state.set_board(1, 1)).to eq(true)
+            expect(state.board.pieces_placed).to eq(2)
+        end
+    end
+
     describe 'get_winner()' do
         it "returns nil for a certain Board state with 0 placed pieces" do
             state = State.new
