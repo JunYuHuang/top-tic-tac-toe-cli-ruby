@@ -197,7 +197,7 @@ RSpec.describe 'Board' do
             expect(board.did_win_pos_diag?(Piece.CROSS)).to eq(false)
         end
 
-        it "returns true if called on a certain grid with 7 placed pieces" do
+        it "returns true if called on a certain grid with 3 placed pieces" do
             grid = [
                 [Piece.EMPTY, Piece.EMPTY, Piece.CIRCLE],
                 [Piece.EMPTY, Piece.CIRCLE, Piece.EMPTY],
@@ -219,10 +219,32 @@ RSpec.describe 'Board' do
             expect(board.did_win_neg_diag?(Piece.CROSS)).to eq(false)
         end
 
-        it "returns true if called on a certain grid with 7 placed pieces" do
+        it "returns true if called on a certain grid with 3 placed pieces" do
             grid = [
                 [Piece.CIRCLE, Piece.EMPTY, Piece.EMPTY],
                 [Piece.EMPTY, Piece.CIRCLE, Piece.EMPTY],
+                [Piece.EMPTY, Piece.EMPTY, Piece.CIRCLE]
+            ]
+            board = Board.new(grid)
+            expect(board.did_win_neg_diag?(Piece.CIRCLE)).to eq(true)
+        end
+    end
+
+    describe "did_win?()" do
+        it "returns false if called on a certain grid with 3 placed pieces" do
+            grid = [
+                [Piece.EMPTY, Piece.CIRCLE, Piece.EMPTY],
+                [Piece.EMPTY, Piece.CROSS, Piece.EMPTY],
+                [Piece.EMPTY, Piece.EMPTY, Piece.CROSS]
+            ]
+            board = Board.new(grid)
+            expect(board.did_win?(Piece.CROSS)).to eq(false)
+        end
+
+        it "returns true if called on a certain grid with 6 placed pieces" do
+            grid = [
+                [Piece.CIRCLE, Piece.CROSS, Piece.CROSS],
+                [Piece.EMPTY, Piece.CIRCLE, Piece.CROSS],
                 [Piece.EMPTY, Piece.EMPTY, Piece.CIRCLE]
             ]
             board = Board.new(grid)
