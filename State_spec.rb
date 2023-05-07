@@ -147,7 +147,7 @@ RSpec.describe 'State' do
             expect(state.get_winner).to eq(Piece.CIRCLE)
         end
 
-        it "returns Piece.CROSS for a certain Board state with 5 placed pieces" do
+        it "returns Piece.CROSS for a certain Board state with 7 placed pieces" do
             grid = [
                 [Piece.CROSS, Piece.CROSS, Piece.CROSS],
                 [Piece.CIRCLE, Piece.EMPTY, Piece.CROSS],
