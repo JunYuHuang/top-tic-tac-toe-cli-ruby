@@ -16,7 +16,9 @@ ruby index.rb
 ## How to test
 
 ```ruby
+cd specs
 rspec Board_spec.rb
 rspec State_spec.rb
+rspec StateToString_spec.rb
+rspec ConsoleGUI_spec.rb
 ```
-
