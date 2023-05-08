@@ -22,14 +22,6 @@ class State
       @board.is_full?
   end
 
-  def set_board(row, col)
-      if !@board.is_placeable?(row, col)
-          return false
-      end
-      @board.place(row, col, @turn)
-      true
-  end
-
   def get_winner
       if !is_game_over?
           return nil
